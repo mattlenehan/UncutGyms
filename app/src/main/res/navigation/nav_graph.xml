@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/fragment_gyms">
+
+    <fragment
+        android:id="@+id/fragment_gyms"
+        android:name="com.example.uncutgyms.ui.main.home.GymsFragment"
+        android:label="Fitness Studios"
+        tools:layout="@layout/fragment_gyms">
+        <action
+            android:id="@+id/open_gym_details"
+            app:destination="@id/fragment_gym_details"
+            app:popUpTo="@id/fragment_gyms"
+            app:popUpToInclusive="false">
+            <argument
+                android:name="business_info"
+                app:argType="com.example.uncutgyms.models.YelpBusiness"
+                app:nullable="false" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_gym_details"
+        android:name="com.example.uncutgyms.ui.main.details.GymDetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_gym_details">
+        <argument
+            android:name="business_info"
+            app:argType="com.example.uncutgyms.models.YelpBusiness"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>

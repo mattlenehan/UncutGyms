@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UncutGyms</string>
+    <string name="map">Map</string>
+    <string name="list">List</string>
+    <string name="x_miles_away">%s miles away</string>
+    <string name="n_a">N/A</string>
+    <string name="call_business">Call Business</string>
+    <string name="share">share</string>
+</resources>
