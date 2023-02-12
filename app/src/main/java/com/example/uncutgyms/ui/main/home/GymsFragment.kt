@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +43,7 @@ class GymsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     private val requestPermissionLauncher = this.requestLocationPermission(
         userPermanentlyDeniedLocPermissions = userPermanentlyDeniedLocPermissions,
         onGrantedCallback = {
-            map.isMyLocationEnabled = true
+            googleMap?.isMyLocationEnabled = true
             mainViewModel.findLocation()
         },
         askConfirmationToSkip = {},
@@ -58,7 +57,7 @@ class GymsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     private var _binding: FragmentGymsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var map: GoogleMap
+    private var googleMap: GoogleMap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -157,7 +156,7 @@ class GymsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                         it.forEach { item ->
                             if (item is GymViewItem.GymListItem) {
                                 val gym = item.business
-                                map.addMarker(
+                                googleMap?.addMarker(
                                     MarkerOptions()
                                         .position(
                                             LatLng(
@@ -171,7 +170,7 @@ class GymsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                             }
                         }
                     }
-                    map.moveCamera(
+                    googleMap?.moveCamera(
                         CameraUpdateFactory.newLatLngZoom(
                             LatLng(
                                 mainViewModel.locationStatus.value?.data?.latitude
@@ -246,7 +245,7 @@ class GymsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            map.isMyLocationEnabled = true
+            googleMap?.isMyLocationEnabled = true
             mainViewModel.findLocation()
         } else {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -267,9 +266,9 @@ class GymsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickList
     }
 
     override fun onMapReady(p0: GoogleMap) {
-        map = p0
+        googleMap = p0
         checkPermissions()
-        map.setOnMarkerClickListener(this)
+        googleMap?.setOnMarkerClickListener(this)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
