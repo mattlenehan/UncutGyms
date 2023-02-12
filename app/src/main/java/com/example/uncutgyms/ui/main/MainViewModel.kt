@@ -100,11 +100,10 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _directions.value = ApiResult.loading()
             locationRepository.getDirections(map).collect { apiResult ->
-                val data = apiResult?.data
-                if (apiResult?.status == ApiResult.Status.SUCCESS && data != null) {
-                    _directions.value = ApiResult.success(apiResult.data)
-                } else if (apiResult?.status == ApiResult.Status.ERROR) {
-                    _directions.value = ApiResult.error("unable to fetch directions", null)
+                apiResult?.let {
+                    _directions.value =
+                        ApiResult(it.status, it.data, it.error, "unable to fetch directions")
+
                 }
             }
         }

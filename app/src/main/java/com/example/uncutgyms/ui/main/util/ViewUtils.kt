@@ -26,7 +26,7 @@ fun ImageRequest.Builder.roundedCorners() {
     transformations(
         RoundedCornersTransformation(16f)
     )
-    fallback(com.google.android.material.R.color.m3_ref_palette_dynamic_neutral70)
+    placeholder(com.google.android.material.R.color.m3_ref_palette_dynamic_neutral70)
 }
 
 fun Fragment.requestLocationPermission(

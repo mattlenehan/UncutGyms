@@ -24,8 +24,14 @@ internal sealed class GymViewHolder(bindings: ViewBinding) :
                     item.business.distance?.toDouble()?.div(1609.344)
                 )
             )
-            bindings.icon.load(item.business.imageUrl) {
-                roundedCorners()
+            if (item.business.imageUrl.isNotEmpty()) {
+                bindings.icon.load(item.business.imageUrl) {
+                    roundedCorners()
+                }
+            } else {
+                bindings.icon.load(R.drawable.ic_launcher_background) {
+                    roundedCorners()
+                }
             }
             bindings.root.setOnClickListener {
                 onClick(item.business.id)
