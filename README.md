@@ -1,7 +1,9 @@
-# UncutGyms
+# Uncut Gyms 💪🔎
 app to find local fitness businesses
 
 MVVM * Retrofit * OkHttp * Moshi * ViewBinding * Hilt * LiveData * StateFlow * Coil * Jetpack Navigation
+
+https://user-images.githubusercontent.com/6844125/218287349-195346f4-cbfb-44c7-98bd-ae4bb479314f.mp4
 
 Features to improve the user experience:
 - offer ability to "Search this area" for new results after the map has moved a certain distance away from origin
